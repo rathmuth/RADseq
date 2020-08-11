@@ -34,7 +34,9 @@ First, open a terminal and go into the **working directory** where input files a
     └── snakefile_radPipe
 
 
-To initialize a project, please specify path for working directory on the snakefile_redPipe. You also need to create config.yaml which specify path sequencing read files for each samples as well as their corresponding population (see example/config.yaml). For testing, you can use test data (example/data/three files with fq-suffix) .
+To initialize a project, please specify path for working directory on the snakefile_radPipe. You also need to create config.yaml which specify path sequencing read files for each samples as well as their corresponding population (see example/config.yaml). 
+
+For testing, you can use test data (example/data/three files with fq-suffix) .
 
 Before running the pipeline, we suggest to check whether output files can be generated from the inputs, using the `--dryrun` option.
 
