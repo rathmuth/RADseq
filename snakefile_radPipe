@@ -50,7 +50,7 @@ rule cstacks:
         inbase = lambda wildcards, input: os.path.dirname(input.data[0])
     threads: 15
     shell: 
-        "set +o pipefail;cstacks -n 2 -P {params.inbase} -M {input.popfile} -p {threads}"
+        "set +o pipefail;cstacks -n 3 -P {params.inbase} -M {input.popfile} -p {threads}"
  
 rule merge_catalog:
     input:
