@@ -63,13 +63,16 @@ snakemake -s snakefile_radPipe --cores <num_CPUcores> --configfile path/to/confi
 ## Other analysis
 We estimate SFS using [ANGSD](http://www.popgen.dk/angsd/index.php/ANGSD). Further details can be found in the [wiki](http://www.popgen.dk/angsd/index.php/SFS_Estimation) pages.
 
-## Contributions
+## Contributors
 
 - [Rasmus Heller](https://orcid.org/0000-0001-6583-6923)
 - [Thorfinn Sand Korneliussen](https://orcid.org/0000-0001-7576-5380)
 - [Anders Albrechtsen](https://orcid.org/0000-0001-7306-031X)
 - [Genis Garcia Erill](http://orcid.org/0000-0003-3150-1708)
 - [Casia Nursyifa](https://orcid.org/0000-0002-7803-9664)
+
+## Zebra RadSeq Data
+Rad-Sequencing data for zebra are available at http://popgen.dk/rasmus/radseq/fastq/
 
 ## Contact
 
