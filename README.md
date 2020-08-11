@@ -71,4 +71,4 @@ We estimate SFS using [ANGSD](http://www.popgen.dk/angsd/index.php/ANGSD). Furth
 
 ## Contact
 
-We encourage users to use the [issue tracker](https://?????). For further enquiries, you can also contact radPipe Dev Team <????>.
+We encourage you to report any issue you might find using [issue tracker](https://github.com/rathmuth/RADseq/issues). For further enquiries, you can also contact radPipe Dev Team at ????.
