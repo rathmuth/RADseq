@@ -15,10 +15,10 @@ conda activate radPipe
 ```
 Please note to run `conda activate radPipe` everytime you want to run radPipe
 
-3. Get radPipe
+3. Get radPipe 
 
 ```
-git clone https://github.com/................
+git clone https://github.com/rathmuth/RADseq.git
 ```
 
 ## Running radPipe
