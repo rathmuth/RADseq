@@ -1,0 +1,8 @@
+data:
+  A: /binf-isilon/hellergrp/nzg134/radseqPipelinePAper/data/A.fq
+  B: /binf-isilon/hellergrp/nzg134/radseqPipelinePAper/data/B.fq
+  C: /binf-isilon/hellergrp/nzg134/radseqPipelinePAper/data/C.fq
+pops:
+  A: pop1
+  B: pop1
+  C: pop2
