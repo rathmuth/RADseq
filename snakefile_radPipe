@@ -1,15 +1,10 @@
 import os
 
-
 ### CHANGE THIS TO YOUR WORKING DIRECTORY
 WORKDIR="/isdata/hellergrp/nzg134/radseqPipelinePAper/clean"
-# POPFILE=os.path.join(WORKDIR, "data/sample_pop.txt")
 configfile: os.path.join(WORKDIR, "config.yaml")
 ## snakemake --configfile path/to/file
-
-
 REFMAKER = os.path.join(WORKDIR,"consensus_referenceMaker.sh")
-
 
 ### Generate an ID for each sample as required by ustacks
 sample_to_id = {s:idx for idx, s in enumerate(config["data"].keys(), start=1)}
@@ -42,7 +37,6 @@ rule ustacks:
     threads: 15
     shell:
         "set +o pipefail;ustacks -f {input} -o {params.outbase} -i {params.n} --name {wildcards.sample} -p {threads}"
-
 
 rule cstacks:
     input:
