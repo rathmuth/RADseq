@@ -4,7 +4,7 @@ import os
 OUTDIR="."
 ## configfile: os.path.join(OUTDIR, "config.yaml")
 ## snakemake --configfile path/to/file
-REFMAKER = os.path.join(OUTDIR,"consensus_referenceMaker.sh")
+REFMAKER = "consensus_referenceMaker.sh"
 
 ### Generate an ID for each sample as required by ustacks
 sample_to_id = {s:idx for idx, s in enumerate(config["data"].keys(), start=1)}
@@ -58,7 +58,7 @@ rule merge_catalog:
     output:
         os.path.join(OUTDIR, "results/consensus.fa")
     shell:
-        "{REFMAKER}"
+        "bash {REFMAKER}"
 
 rule bwa_index:
     input:
