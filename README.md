@@ -23,30 +23,23 @@ git clone https://github.com/rathmuth/RADseq.git
 
 ## Running radPipe
 
-First, open a terminal and go into the **working directory** where input files are stored (i.e.,  the sequencing reads). We use a two level directory hierarchy and we expect sequencing reads in a folder name `data`. 
-
-#### A working directory layout
-
-    .
-    ├── data                 # where input files are stored (sequencing reads)
-    ├── config.yaml              
-    ├── consensus_referenceMaker.sh          
-    └── snakefile_radPipe
-
-
-To initialize a project, please specify path for working directory on the snakefile_radPipe. You also need to create config.yaml which specify path sequencing read files for each samples as well as their corresponding population (see example/config.yaml). 
-
-For testing, you can use test data (example/data/three files with fq-suffix) .
+To initialize a project, please specify path for ouput directory (OUTDIR) on the snakefile_radPipe. You also need to create config.yaml which specify absolute path of sequencing read files for each samples as well as their corresponding population (see example/config.yaml). 
 
 Before running the pipeline, we suggest to check whether output files can be generated from the inputs, using the `--dryrun` option.
 
 ```
-snakemake -s snakefile_radPipe --dry-run
+snakemake -s radPipe.snakefile --dry-run
 ```
 When actually running the pipeline, you need to specify CPU cores will be used with --cores and path to config.yaml
 
 ```
-snakemake -s snakefile_radPipe --cores <num_CPUcores> --configfile path/to/config.yaml 
+snakemake -s radPipe.snakefile --configfile path/to/config.yaml --cores <num_CPUcores>
+```
+
+For testing, you can try run:
+```
+cd example
+snakemake -s radPipe_snakefile --configfile config.yaml --cores 10
 ```
 
 ## Dependencies
