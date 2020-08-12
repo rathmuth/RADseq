@@ -33,7 +33,7 @@ snakemake -s radPipe.snakefile --dry-run
 When actually running the pipeline, you need to specify CPU cores will be used with --cores and path to config.yaml
 
 ```
-snakemake -s radPipe.snakefile --configfile path/to/config.yaml --cores <num_CPUcores>
+snakemake -s radPipe_snakefile --configfile path/to/config.yaml --cores <num_CPUcores>
 ```
 
 For testing, you can try run:
