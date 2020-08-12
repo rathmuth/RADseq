@@ -1,0 +1,84 @@
+import os
+
+### CHANGE THIS TO YOUR WORKING DIRECTORY
+OUTDIR="."
+## configfile: os.path.join(OUTDIR, "config.yaml")
+## snakemake --configfile path/to/file
+REFMAKER = os.path.join(OUTDIR,"consensus_referenceMaker.sh")
+
+### Generate an ID for each sample as required by ustacks
+sample_to_id = {s:idx for idx, s in enumerate(config["data"].keys(), start=1)}
+
+print(config)
+rule all:
+    input:
+        expand(os.path.join(OUTDIR,"results/{sample}.bam"),sample=config["data"].keys())
+
+
+rule convert_popfile:
+    output:
+        os.path.join(OUTDIR, "results/popfile.txt")
+    run:
+        with open(output[0], 'w') as fh:
+            for k, v in config["pops"].items():
+                print(f"{k}\t{v}", file=fh)
+                
+rule ustacks:
+    input:
+        lambda wildcards: config["data"][wildcards.sample]
+    output:
+        os.path.join(OUTDIR, "results/{sample}.snps.tsv"),	
+        os.path.join(OUTDIR, "results/{sample}.alleles.tsv"),
+        os.path.join(OUTDIR, "results/{sample}.tags.tsv"),
+	#directory(os.path.join(OUTDIR, "results/{sample}))
+    params:
+        n = lambda wildcards: sample_to_id[wildcards.sample],
+        outbase = lambda wildcards, output: os.path.dirname(output[0])
+    threads: 15
+    shell:
+        "set +o pipefail;ustacks -f {input} -o {params.outbase} -i {params.n} --name {wildcards.sample} -p {threads}"
+
+rule cstacks:
+    input:
+        data = expand(os.path.join(OUTDIR, "results/{sample}.snps.tsv"), sample=config["data"].keys()),
+        popfile = os.path.join(OUTDIR, "results/popfile.txt")
+    output:
+        os.path.join(OUTDIR, "results/catalog.alleles.tsv"),
+        os.path.join(OUTDIR, "results/catalog.snps.tsv"),
+        os.path.join(OUTDIR, "results/catalog.tags.tsv")
+    params:
+        inbase = lambda wildcards, input: os.path.dirname(input.data[0])
+    threads: 15
+    shell: 
+        "set +o pipefail;cstacks -n 3 -P {params.inbase} -M {input.popfile} -p {threads}"
+ 
+rule merge_catalog:
+    input:
+        os.path.join(OUTDIR, "results/catalog.tags.tsv")
+    output:
+        os.path.join(OUTDIR, "results/consensus.fa")
+    shell:
+        "{REFMAKER}"
+
+rule bwa_index:
+    input:
+        os.path.join(OUTDIR, "results/consensus.fa")
+    output:
+        os.path.join(OUTDIR, "results/consensus.fa.amb"),
+        os.path.join(OUTDIR, "results/consensus.fa.ann"),
+        os.path.join(OUTDIR, "results/consensus.fa.bwt"),
+        os.path.join(OUTDIR, "results/consensus.fa.pac"),
+        os.path.join(OUTDIR, "results/consensus.fa.sa")
+    shell:
+        "bwa index {input}"
+        
+rule bwa_mem:
+    input:
+        ref = os.path.join(OUTDIR, "results/consensus.fa"),
+        data = os.path.join(OUTDIR, "data/{sample}.fq"),
+        dummy = os.path.join(OUTDIR, "results/consensus.fa.amb")
+    output:
+        os.path.join(OUTDIR,"results/{sample}.bam")
+    threads: 15
+    shell:
+        "set +o pipefail;bwa mem {input.ref} {input.data} -t {threads} | samtools sort -@ {threads} -o {output} -"
