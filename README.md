@@ -38,8 +38,7 @@ snakemake -s radPipe_snakefile --configfile path/to/config.yaml --cores <num_CPU
 
 For testing, you can try run:
 ```
-cd example
-snakemake -s radPipe_snakefile --configfile config.yaml --cores 10
+snakemake -s radPipe_snakefile --configfile example/config.yaml --cores 10
 ```
 
 ## Dependencies
