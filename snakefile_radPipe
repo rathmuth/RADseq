@@ -2,7 +2,7 @@ import os
 
 ### CHANGE THIS TO YOUR WORKING DIRECTORY
 WORKDIR="/isdata/hellergrp/nzg134/radseqPipelinePAper/clean"
-configfile: os.path.join(WORKDIR, "config.yaml")
+## configfile: os.path.join(WORKDIR, "config.yaml")
 ## snakemake --configfile path/to/file
 REFMAKER = os.path.join(WORKDIR,"consensus_referenceMaker.sh")
 
