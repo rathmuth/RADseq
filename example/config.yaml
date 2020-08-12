@@ -1,7 +1,7 @@
 data:
-  A: data/A.fq
-  B: data/B.fq
-  C: data/C.fq
+  A: example/data/A.fq
+  B: example/data/B.fq
+  C: example/data/C.fq
 pops:
   A: pop1
   B: pop1
