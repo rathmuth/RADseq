@@ -75,7 +75,7 @@ rule bwa_index:
 rule bwa_mem:
     input:
         ref = os.path.join(OUTDIR, "results/consensus.fa"),
-        data = os.path.join(OUTDIR, "data/{sample}.fq"),
+        data = lambda wildcards: config["data"][wildcards.sample],
         dummy = os.path.join(OUTDIR, "results/consensus.fa.amb")
     output:
         os.path.join(OUTDIR,"results/{sample}.bam")
