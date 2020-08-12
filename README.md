@@ -45,7 +45,7 @@ snakemake -s radPipe_snakefile --configfile config.yaml --cores 10
 ## Dependencies
 
 - Stacks 2.53
-- Bwa 0.7.17-r1198-dirty
+- Bwa 0.7.17
 
 ## Other dependencies
 
