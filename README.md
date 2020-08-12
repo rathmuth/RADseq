@@ -28,7 +28,7 @@ To initialize a project, please specify path for ouput directory (OUTDIR) on the
 Before running the pipeline, we suggest to check whether output files can be generated from the inputs, using the `--dryrun` option.
 
 ```
-snakemake -s radPipe.snakefile --dry-run
+snakemake -s radPipe_snakefile --dry-run
 ```
 When actually running the pipeline, you need to specify CPU cores will be used with --cores and path to config.yaml
 
